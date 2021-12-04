@@ -69,9 +69,9 @@ public class Post {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof Post otherPost))
+        if (!(obj instanceof Post))
             return false;
-
+        Post otherPost = (Post) obj;
         return this.title.equals(otherPost.getTitle()) &&
                this.body.equals(otherPost.getBody());
     }

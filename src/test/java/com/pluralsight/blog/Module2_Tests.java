@@ -8,9 +8,9 @@ import com.pluralsight.blog.model.Post;
 import com.pluralsight.blog.data.PostRepository;
 import org.apache.commons.io.IOUtils;
 import org.hibernate.Hibernate;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +19,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.cdi.Eager;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.persistence.*;
@@ -37,12 +38,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import static org.junit.Assert.*;
+import static org.springframework.test.util.AssertionErrors.*;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest
 //@AutoConfigureMockMvc
-//@PrepareForTest(DatabaseLoader.class)
+@PrepareForTest(DatabaseLoader.class)
 public class Module2_Tests {
 
     //@Autowired
@@ -56,7 +57,7 @@ public class Module2_Tests {
     @Autowired
     private PostRepository postRepository;
 
-    @Before
+    @BeforeEach
     public void setup() {
         Constructor<DatabaseLoader> constructor = null;
         try {

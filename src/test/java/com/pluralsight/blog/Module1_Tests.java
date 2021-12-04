@@ -4,16 +4,19 @@ import com.pluralsight.blog.data.DatabaseLoader;
 import com.pluralsight.blog.model.Post;
 import com.pluralsight.blog.data.PostRepository;
 import org.apache.commons.io.IOUtils;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.aspectj.lang.annotation.Before;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.stubbing.Answer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.DefaultApplicationArguments;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RestResource;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.persistence.*;
@@ -29,14 +32,15 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.springframework.test.util.AssertionErrors.*;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest
 //@AutoConfigureMockMvc
-@PrepareForTest(DatabaseLoader.class)
+//@PrepareForTest(DatabaseLoader.class)
 public class Module1_Tests {
 
     @Autowired
@@ -47,7 +51,7 @@ public class Module1_Tests {
 
     private PostRepository spyRepository;
 
-    @Before
+    @BeforeEach
     public void setup() {
         Constructor<DatabaseLoader> constructor = null;
         try {
